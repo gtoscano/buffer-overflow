@@ -1,5 +1,9 @@
-# 🛡️ Teaching Buffer Overflow in C++
-
+# ###🛡️ Teaching Buffer Overflow in C++
+# Clone the Repository 
+```
+git clone git@github.com:gtoscano/buffer-overflow.git
+```
+# Objective
 👨‍🏫 **Objective**: Understand how unsafe input functions in C/C++ can be exploited to alter program flow.
 
 ---
