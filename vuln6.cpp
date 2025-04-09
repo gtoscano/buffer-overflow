@@ -36,7 +36,8 @@ void line7() {
 print_line_t lines[] = {
     line1, line2, line3, line4, line5, line6,
     line7, // The "banner line" that actually calls /bin/sh
-    nullptr
+    NULL
+    
 };
 
 // A function that (pretends to) read input, but uses gets() => buffer overflow.
@@ -49,7 +50,7 @@ void vulnerableInput() {
 
 int main() {
     // Print each "line" in the banner via the function pointer array
-    for (int i = 0; lines[i] != nullptr; i++) {
+    for (int i = 0; lines[i] != NULL; i++) {
         lines[i](); 
     }
 
