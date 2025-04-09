@@ -10,8 +10,7 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ub
     apt-get install -y build-essential g++ vim gdb gcc-multilib g++-multilib libc6-dev-i386 && \
     apt-get clean
 
-COPY vuln.cpp /vuln.cpp
-
+COPY vuln*.cpp /
 
 CMD [ "bash" ]
 
