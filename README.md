@@ -28,6 +28,38 @@ We'll exploit a simple C++ program that:
 
 ---
 
+## Diagram of Stack and Overflow
+```
+EBP = Extended Base Pointer
+FP = Frame Pointer
+RA = Return Address
+
+                  +---------------------------+
+                  |  higher stack frames     |  (previous function contexts)
+                  +---------------------------+
+                  |  saved EBP (old FP)      | <-- saved frame pointer for vulnerable()
+                  +---------------------------+
+(legit RA) ---->  |  return address for      | <-- normally points back to main()
+                  |  vulnerable()            |
+                  +---------------------------+
+                  |                         |  
+  buffer start -->|  buffer[0]              |  
+                  |  buffer[1]              |  
+                  |  buffer[2]              |  
+                  |       ...               |  64 bytes allocated
+                  |  buffer[63]             |  
+  buffer end ---->|                         |
+                  +---------------------------+
+                  |  (possible padding)      | <-- not always present, but can exist
+                  +---------------------------+
+(overflow data) ->|  overwritten EBP         | <-- overwritten by out-of-bounds write
+                  +---------------------------+
+(overflow data) ->|  new return address      | <-- attacker-supplied address of secret()
+                  +---------------------------+
+                  |  rest of the stack...    |
+                  +---------------------------+
+```
+
 ## 🧪 The Vulnerable Code
 
 ```cpp
